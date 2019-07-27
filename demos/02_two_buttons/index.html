@@ -1,0 +1,63 @@
+<html> 
+<head>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+    
+<body>
+    <div id="root"></div>
+  <!--  <script src="like_button.js"></script> -->
+</body>
+
+<script type='text/babel'>
+'use strict';
+
+class Note extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      l1: +props.l1, 
+      l2: +props.l2
+    }
+  }
+
+  updateCount(b_id) {
+    console.log(b_id)
+    var id = "l" + b_id[1]
+    this.setState( (prev5State, props) => {
+      return {[id]: +prev5State[id] + 1}
+    })
+  }
+
+  render() {
+    return (
+      <div> 
+        <p> Here are some buttons. Let's count how many times you click it. </p>
+        <button type='button' id='b1' onClick={e => this.updateCount(e.target.id)}> Button 1 </button> 
+        <br />
+        <button type='button' id='b2'  onClick={e => this.updateCount(e.target.id)}> Button 2 </button>
+        <ul>
+          <li> Clicked button 1: {this.state.l1} times</li>
+          <li> Clicked button 2: {this.state.l2} times </li>  
+        </ul>
+      </div>
+    );
+  }
+}
+// If you want to set up defaults
+Note.defaultProps = {
+  l1: 100, 
+  l2: 200
+}
+
+ReactDOM.render(
+  <Note l1="0" l2="0" />, 
+  document.getElementById('root')
+)
+
+
+</script>
+
+</html>
+
